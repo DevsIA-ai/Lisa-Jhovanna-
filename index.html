@@ -117,26 +117,11 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text); o
   text-align:center; padding:4rem 2rem;
   background:radial-gradient(circle at 30% 20%,#3a1119 0%,#1c0d10 55%,#0c0708 100%);
 }
-#hero-video, #hero-image {
+#hero-image {
   position:absolute; inset:0;
   width:100%; height:100%; object-fit:cover;
   z-index:0; pointer-events:none;
 }
-#hero-image { display:none; }
-#hero-switch {
-  position:absolute; bottom:7.5rem; left:50%; transform:translateX(-50%); z-index:6;
-  display:flex; gap:.3rem;
-  background:rgba(255,255,255,.92); border:1px solid var(--gold-light);
-  border-radius:50px; padding:.35rem;
-  backdrop-filter:blur(12px); box-shadow:0 2px 20px rgba(124,31,52,.2);
-}
-.hs-btn {
-  border:none; background:transparent; cursor:pointer;
-  font-family:var(--sans); font-size:0.65rem; letter-spacing:.1em; text-transform:uppercase;
-  color:var(--rose-dark); padding:.5rem .85rem; border-radius:50px; transition:.25s;
-}
-.hs-btn:hover { background:rgba(124,31,52,.1); }
-.hs-btn.active { background:var(--rose); color:#fff; }
 #hero-overlay {
   position:absolute; inset:0; z-index:1; pointer-events:none;
   background: linear-gradient(160deg,rgba(58,31,44,.55) 0%,rgba(47,22,34,.45) 60%,rgba(22,10,16,.65) 100%);
@@ -747,8 +732,6 @@ body.env-open { overflow:hidden; }
 @media(max-width:480px){
   .container,.container--wide { padding:3rem 1.5rem; }
   #nav-dots { display:none; }
-  #hero-switch { bottom:6.5rem; padding:.28rem; }
-  .hs-btn { font-size:0.557rem; padding:.42rem .6rem; }
   #music-bar { right:.75rem; top:.75rem; }
   .attend-row { flex-direction:column; }
   .contact-grid { gap:2rem; }
@@ -849,12 +832,6 @@ body.env-open { overflow:hidden; }
 
 <!-- ======================== HERO ======================== -->
 <section id="hero">
-  <div id="hero-switch">
-    <button class="hs-btn active" data-mode="video" onclick="setHeroMedia('video')">Video</button>
-    <button class="hs-btn" data-mode="imagen" onclick="setHeroMedia('imagen')">Imagen</button>
-    <button class="hs-btn" data-mode="nada" onclick="setHeroMedia('nada')">Sin fondo</button>
-  </div>
-  <video id="hero-video" src="video.mp4" autoplay muted loop playsinline></video>
   <img id="hero-image" src="imagenhero.jpeg" alt="">
   <div id="hero-overlay"></div>
   <div class="sparkle-float" style="top:12%;left:7%;animation-delay:0s">✦</div>
@@ -997,7 +974,7 @@ body.env-open { overflow:hidden; }
       <div class="detail-card reveal d2">
         <div class="detail-card-icon">◈</div>
         <p class="detail-card-lbl">Recepción</p>
-        <p class="detail-card-val">19:00 hrs<br><span style="font-size:.99rem">Salón Century</span></p>
+        <p class="detail-card-val">19:30 hrs<br><span style="font-size:.99rem">Salón Century</span></p>
       </div>
     </div>
 
@@ -1033,7 +1010,7 @@ body.env-open { overflow:hidden; }
       <em>Salón Century</em>
     </p>
     <p style="font-size:.9rem;color:var(--text-muted);margin-bottom:.75rem;text-align:center">
-      Recepción con cóctel · 19:00 hrs
+      Recepción con cóctel · 19:30 hrs
     </p>
     <div class="map-box reveal">
       <div class="map-grid-lines"></div>
@@ -1073,7 +1050,7 @@ body.env-open { overflow:hidden; }
       </div>
       <div class="tl-item reveal">
         <div class="tl-dot"></div>
-        <span class="tl-time">19:00 · 19:30 hrs</span>
+        <span class="tl-time">19:30 · 20:00 hrs</span>
         <h3 class="tl-title">Recepción con Cóctel</h3>
         <p class="tl-desc">Bienvenida en Salón Century</p>
       </div>
@@ -1366,26 +1343,6 @@ function sendWhatsApp(){
   let texto = `Hola \n\n¿Asistiré a los XVIII años de Lisa Jhovanna el 30 de Octubre de 2026?\n${asistencia}`;
   if(msg) texto += `\n\nMensaje: ${msg}`;
   window.open('https://wa.me/5215585603252?text=' + encodeURIComponent(texto), '_blank');
-}
-
-/* ---- HERO MEDIA SWITCH ---- */
-function setHeroMedia(mode){
-  const video = document.getElementById('hero-video');
-  const image = document.getElementById('hero-image');
-  document.querySelectorAll('.hs-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
-  if(mode === 'video'){
-    image.style.display = 'none';
-    video.style.display = 'block';
-    video.play().catch(()=>{});
-  } else if(mode === 'imagen'){
-    video.pause();
-    video.style.display = 'none';
-    image.style.display = 'block';
-  } else {
-    video.pause();
-    video.style.display = 'none';
-    image.style.display = 'none';
-  }
 }
 
 /* ---- GALLERY + LIGHTBOX ---- */
